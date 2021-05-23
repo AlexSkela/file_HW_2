@@ -1,27 +1,21 @@
+def add_files(files_list):
+    text_dict = {}
+    for file in files_list:
+        with open(file, encoding='utf-8') as f:
+            file_text = f.readlines()
+            text_dict[len(file_text)] = (file, ' '.join(file_text))
 
-list_dict = {}
-with open('1.txt', 'r', encoding='utf-8') as f:
-    data = f.readlines()
-    list_dict['1.txt'] = data
+    text_dict = dict(sorted(text_dict.items()))
 
-with open('2.txt', 'r', encoding='utf-8') as g:
-    data_1 = g.readlines()
-    list_dict['2.txt'] = data_1
 
-with open('3.txt', 'r', encoding='utf-8') as h:
-    data_2 = h.readlines()
-    list_dict['3.txt'] = data_2
+    with open('finish_fail.txt', 'w', encoding='utf-8') as new:
+        for file, text in text_dict.items():
+            new.write(f'{text[0]} \n')
+            new.write(f'{file} \n')
+            new.write(f'{text[1]}')
 
-print(list_dict)
 
-with open('finish_fail.txt', 'w', encoding='utf-8') as new:
-    for file, list_text in list_dict.items():
-        new.write('\n')
-        new.write(file)
-        new.write('\n')
-        for element in list_text:
-            new.write(element)
-            # new.write('\n')
-
+files = ['1.txt', '2.txt', '3.txt']
+add_files(files)
 
 
